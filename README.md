@@ -1,10 +1,15 @@
 # The Protein Plot
 
-![protein plot](protein_plot_from_excel.png)
+![protein plot](static/protein_plot_from_excel.png)
+
+# Intro
 
 When it comes to eating cheaply, the most important macronutrient is protein. Specifically, you don't need to buy fat and carbs because *if you get enough cheap protein, you'll get the fat and carbs for free*.
 
+# Body
+
 I've made a list of what a frugal person needs to prioritize to get enough food.
+
 1. Protein
 2. Fiber
 3. Vitamins
@@ -27,5 +32,7 @@ Keep in mind that this is a utilitarian approach; it assumes you're a robot that
 
 1. you actually need food, at least some kind of food. You just don't know how much you need, or what kind of food you need. And that's how your anxiety/boredom/stress complex convinces you to eat potato chips; you know you need some sort of food, and I guess potato chips are food.
 2. you need cheap food. You can't afford to buy all these meals from Factor and HelloFresh and UberHealthyEatsFast.
+
+# Conclusion
 
 See this site at https://github.com/davidstadem/protein-plot
