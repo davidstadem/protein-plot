@@ -13,7 +13,7 @@ def cleandollars(s):
 df['Price'] = df['Price'].apply(cleandollars)
 
 def price_per_g_protein(ser):
-    priceperserving = ser['Price']/ser['Servings per container']/ser['Number']
+    priceperserving = ser['Price']/ser['Servings per container']
     pricepergprotein = priceperserving/ser['Protein g']
     return pricepergprotein
 
@@ -39,8 +39,21 @@ df['PCP'] = df.apply(proteindensity, axis=1)
 
 import plotly.express as px
 
-px.scatter(df,
+fig=px.scatter(df,
     x='PCP',
     y='DPG',
     text='Name',
-).show()
+    
+)
+fig.update_traces(
+    mode='text'
+)
+
+fig.update_layout(
+    yaxis_range=(0,11.5),
+    xaxis_range=(0,1),
+    yaxis_tickprefix = '$',
+    yaxis_tickformat='.2f',
+    xaxis_tickformat='.0%',
+)
+fig.show()
