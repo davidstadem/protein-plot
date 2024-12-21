@@ -61,11 +61,73 @@ def make_plot(df):
     )
     return fig
 
+import plotly.graph_objects as go
+import numpy as np
+
+def add_contour(fig, func, x_range, y_range, contour_kwargs=None):
+    """
+    Adds a contour plot to an existing Plotly figure.
+
+    Args:
+        fig: The existing Plotly figure (go.Figure object).
+        func: The function to evaluate for the contour plot. Must accept two numpy arrays as input.
+        x_range: A tuple (min, max) defining the x-axis range.
+        y_range: A tuple (min, max) defining the y-axis range.
+        contour_kwargs: Optional dictionary of keyword arguments passed to go.Contour.
+
+    Returns:
+        The updated Plotly figure.
+        Raises ValueError if x or y range are invalid.
+    """
+
+    if x_range[0] >= x_range[1]:
+        raise ValueError("Invalid x_range: min must be less than max")
+    if y_range[0] >= y_range[1]:
+        raise ValueError("Invalid y_range: min must be less than max")
+
+    x = np.linspace(x_range[0], x_range[1], 100)  # Adjust resolution as needed
+    y = np.linspace(y_range[0], y_range[1], 100)
+    X, Y = np.meshgrid(x, y)
+    Z = func(X, Y)
+
+    default_contour_kwargs = dict(
+        contours_coloring = 'heatmap',
+        line_width = 0,
+        line_color = None,
+        ncontours = 20,
+        opacity = 0.7,
+        colorscale='Electric',
+    )
+    if contour_kwargs is not None:
+        default_contour_kwargs.update(contour_kwargs)
+
+    contour = go.Contour(
+        x=x,
+        y=y,
+        z=Z,
+        **default_contour_kwargs
+    )
+
+    fig.add_trace(contour)
+    fig.update_layout(uirevision="constant")
+    new_data = list(fig.data)  # Convert fig.data to a list (mutable)
+    contour_trace = new_data.pop()  # Remove the last trace (the contour) using pop on the list
+    new_data.insert(0, contour_trace)  # Insert it at the beginning
+    fig.data = tuple(new_data)  # Convert the modified list back to a tuple
+    
+    return fig
+
+
+# Example usage:
+def my_function(x, y):
+    return x-.2*y
+
 
 def main():
     df = read_df()
     df = clean_df(df)
     fig=make_plot(df)
+    fig=add_contour(fig,my_function,x_range=(0,1),y_range=(0,11))
     fig.show()
 
 if __name__ == '__main__':
