@@ -1,6 +1,6 @@
 # The Protein Plot
 
-![protein plot](static/protein_plot_from_excel.png)
+![protein plot](static/protein-plot.png)
 
 # Intro
 This is the Protein Plot, a tool to help you identify cheap protein. You can use cheap protein as the driver for cheap food.
@@ -11,15 +11,10 @@ This is the Protein Plot, a tool to help you identify cheap protein. You can use
 So I'm putting together the grocery list  for the billionth time, or else wandering through the store for the billionth time,
 or sticking my head in the fridge for the billionth time.
 What to eat? What to buy?
+I know there's a tradeoff between good food and cheap food, and I know there's some food that's both good *and* cheap.
+But I don't know how to figure it out, so half the time I just grab something easy - in other words, neither good nor cheap.
 
-<!---
-
-I'm not a particularly picky person,
-but I find myself grabbing easy food instead of good food.
-I don't know what's actually cheap, and good. There's cheap food and there's good food but some foods are both.
--->
-
-With the Protein Plot I have an answer.
+With the Protein Plot I know what's good *and* cheap.
 
 I collected the prices and Nutrition Facts of a bunch of different foods.
 I calculated two numbers: the Protein Price and the Protein Percentage.
@@ -29,17 +24,21 @@ Why, you ask? Well, because *if you get enough cheap protein, you'll get the cal
 # How to Use It
 
 The goal is to get the *highest Protein Percentage* (further to the right) for the *lowest Protein Price* (further down).
-
-Greek yogurt from Sam's club is a much better protein source than a protein shake.
-Pork chops are better than ground beef.
-As far as dry beans go, chickpeas are a little better than black beans, which are a little better than pinto beans, but they're all close.
 Use the plot to train your instincts.
 
-<!---
-> Nerds are welcome to see how I came up with protein formulas and such.
+- Greek yogurt (70% protein, $3/100g) is a much better protein source than a protein shake like Huel (40%, $6/100g). I mean it tastes like chalk, but that's not quantified on the plot.
+- Pork chops are better than ground beef.
+- As far as dry beans go, chickpeas are a little better than black beans, but they're close.
 
--->
+# How to Make It
+I gathered prices and Nutrition Facts over the course of a couple years. I live in North Dakota and shop mostly at Sam's Club, and I gathered these prices mostly in 2022. 
+So these prices are pretty cheap.
 
+Formulas are pretty straightforward:
+
+$Protein\ Density = \frac{g\ Protein\ per\ serving \times 4}{Calories\ per\ serving}$
+
+$\$\ per\ 100g\ Protein = \frac{Container\ Price}{Servings\ per\ container\ \times\ g\ Protein\ per\ serving}\times 100$
 
 # If you get enough cheap protein, you'll get the calories and fat and carbs for free
 
@@ -76,8 +75,8 @@ If carbs and fat are basically free, then I can skip ahead and check off level 3
 because if I get enough *cheap* protein then I will definitely get enough calories.
 
 
-1. Calories
-2. Water
+1. Water
+2. Calories
 3. Protein
 4. Fiber
 5. Minimize "Bad Stuff" (trans fats, carcinogens, microplastics)

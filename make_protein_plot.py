@@ -54,10 +54,38 @@ def make_plot(df):
 
     fig.update_layout(
         yaxis_range=(0,11.5),
-        xaxis_range=(0,1),
         yaxis_tickprefix = '$',
         yaxis_tickformat='.2f',
+        xaxis_range=(0,1.1),
         xaxis_tickformat='.0%',
+        xaxis_title='Protein Percentage (% calories from protein)',
+        yaxis_title='$ per 100g Protein',
+    )
+
+    fig.add_annotation(
+        x=.99,
+        y=0.5,
+        ax=0,
+        ay=-70,
+        text='Cheaper is Better',
+        xanchor='right',
+        #textangle=90,
+    )
+    fig.add_annotation(
+        x=0.97,
+        y=0.3,
+        ax=-110,
+        ay=0,
+        text='More Protein is Better',
+    )
+    fig.update_annotations(
+        font=dict(
+            color="black",
+            size=12,
+            style="italic",
+        ),
+        showarrow=True,
+        arrowhead=1,
     )
     return fig
 
@@ -96,7 +124,9 @@ def add_contour(fig, func, x_range, y_range, contour_kwargs=None):
         line_color = None,
         ncontours = 20,
         opacity = 0.7,
-        colorscale='Electric',
+        colorscale='RdBu',
+        #coloraxis='coloraxis', # this doesn't work
+        showscale=False,
     )
     if contour_kwargs is not None:
         default_contour_kwargs.update(contour_kwargs)
@@ -127,8 +157,15 @@ def main():
     df = read_df()
     df = clean_df(df)
     fig=make_plot(df)
-    fig=add_contour(fig,my_function,x_range=(0,1),y_range=(0,11))
-    fig.show()
+    fig=add_contour(fig,my_function,x_range=(0,1),y_range=(0,11.5))
+    #fig.show()
+    fig.update_layout(
+        title='Cheap Protein Plot',
+        margin=dict(
+            r=5,
+        )
+    )
+    fig.write_image('static/protein-plot.png',scale=3)
 
 if __name__ == '__main__':
     main()
