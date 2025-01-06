@@ -23,6 +23,10 @@ CALS_PER_G = {
     'Protein g':4,
 }
  
+def totalcalories(ser):
+    tots = ser.loc[CALS_PER_G.keys()]*list(CALS_PER_G.values())
+    cals=tots.sum()
+    return cals
 
 def proteindensity(ser, use_given_cals=True):
     
@@ -37,7 +41,12 @@ def clean_df(df):
     df['Price'] = df['Price'].apply(cleandollars)
     df['DPG'] = df.apply(price_per_g_protein, axis=1)*100
     df['PCP'] = df.apply(proteindensity, axis=1)
+    df['CalcCals'] = df.apply(totalcalories, axis=1)
+    df['CalorieClosure'] = df['Calories per serving']/df['CalcCals']
     return df
+
+def plot_calorie_closure(df):
+    pass
 
 def make_plot(df):
     import plotly.express as px
@@ -153,7 +162,7 @@ def my_function(x, y):
     return x-.2*y
 
 
-def main():
+def make_fig_easy():
     df = read_df()
     df = clean_df(df)
     fig=make_plot(df)
@@ -165,7 +174,12 @@ def main():
             r=5,
         )
     )
+    return df,fig
+
+def main():
+    df,fig = make_fig_easy()
     fig.write_image('static/protein-plot.png',scale=3)
+    df.to_csv('out.csv')
 
 if __name__ == '__main__':
     main()
