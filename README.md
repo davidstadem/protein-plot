@@ -47,8 +47,10 @@ See this site at https://github.com/davidstadem/protein-plot
 
 ------------------------
 
-If you're still reading, maybe you have some burning questions or Important Stuff That You Need To Tell Me.  you're interested in some rambly half-baked attempts to answer your 
-New Year's Day, 2025, I posted this [on Reddit](https://www.reddit.com/r/Frugal/comments/1hr3r2t/the_protein_plot_cheap_food_is_basically_cheap/).
+If you're still reading, maybe you have some burning questions or Important Stuff That You Need To Tell Me.
+Perhaps you're interested in some rambly half-baked attempts to answer those questions! 
+
+On New Year's Day, 2025, I posted this [on Reddit](https://www.reddit.com/r/Frugal/comments/1hr3r2t/the_protein_plot_cheap_food_is_basically_cheap/).
 I got some great feedback.
 Below is a bunch of rambly FAQ stuff that didn't make it into the post, as well as feedback from the post.
 
@@ -81,9 +83,11 @@ Specifically, you don't need to buy fat and carbs because *if you get enough che
 
 # But Not all Protein is Created Equal
 
-This was the main complaint I got. Animal proteins should outrank plant proteins.
+This was the main complaint I got: Animal proteins should outrank plant proteins.
 
-According to [u/Ajreil](https://www.reddit.com/r/Frugal/comments/1hr3r2t/comment/m4veksa/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) and [Healthline](https://www.healthline.com/nutrition/incomplete-protein), it is, so there!
+**Response**: well according to [u/Ajreil](https://www.reddit.com/r/Frugal/comments/1hr3r2t/comment/m4veksa/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) and [Healthline](https://www.healthline.com/nutrition/incomplete-protein), all protein *is* created equal, so there!
+OK, it's true that not all protein is exactly equal. But the differences are complex, and different proteins are going to be different for different people, and all that. Accounting for that complexity is going to add confusion to the plot.
+Ultimately, I want to make something that works for a wide variety of people, and treating all protein as equal is a simple approach that I think works.
 
 
 # But I Need At Least SOME Carbs!
