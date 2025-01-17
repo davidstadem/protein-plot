@@ -126,7 +126,9 @@ class ProteinPlot:
             The updated Plotly figure.
             Raises ValueError if x or y range are invalid.
         """
-
+        if fig is None:
+            fig = self.fig
+        
         if x_range[0] >= x_range[1]:
             raise ValueError("Invalid x_range: min must be less than max")
         if y_range[0] >= y_range[1]:
