@@ -1,7 +1,7 @@
 from dash import dcc, html, Dash, Input, Output, callback
 import plotly.graph_objects as go
 
-import make_protein_plot as mp
+import protein_plot as mp
 
 app = Dash(__name__)
 
