@@ -70,12 +70,10 @@ def download_csv(n_clicks):
 
 #fig = update_graph(csvpath=protein_plot.PRICESPATH)
 
-def readme():
-    with open('README.md', 'r') as file:
+def markdown_text():
+    with open('manifesto.md', 'r') as file:
         content = file.read()
     return content
-
-markdown_text = readme()
 
 app.layout = html.Div([
     dcc.Upload(
@@ -108,7 +106,11 @@ app.layout = html.Div([
     ),
     html.Button("Download CSV!", id="download-csv"),
     dcc.Download(id="download-dataframe-csv"),
-    dcc.Markdown(children=markdown_text),  
+    html.Img(
+        src='static/protein-plot.png', 
+        style={'width': '100%',}# 'float': 'right'}
+    ),
+    dcc.Markdown(children=markdown_text(),mathjax=True),  
 ])
 
 if __name__ == '__main__':
