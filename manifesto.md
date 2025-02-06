@@ -52,7 +52,6 @@ Below is a bunch of rambly FAQ stuff that didn't make it into the post, as well 
 
 ------------------------
 
-
 # If you get enough cheap protein, you'll get the calories and fat and carbs for free
 
 What's the definition of cheap food? Price per pound?
@@ -76,23 +75,9 @@ But protein doesn't work that way. There aren't really any pure protein sources,
 This means that when it comes to eating cheaply, the most important macronutrient is protein.
 Specifically, you don't need to buy fat and carbs because *if you get enough cheap protein, you'll get the fat and carbs for free*.
 
-
-# But Not all Protein is Created Equal
-
-This was the main complaint I got: Animal proteins should outrank plant proteins.
-
-**Response**: well according to [u/Ajreil](https://www.reddit.com/r/Frugal/comments/1hr3r2t/comment/m4veksa/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) and [Healthline](https://www.healthline.com/nutrition/incomplete-protein), all protein *is* created equal, so there!
-OK, it's true that not all protein is exactly equal. But the differences are complex, and different proteins are going to be different for different people, and all that. Accounting for that complexity is going to add confusion to the plot.
-Ultimately, I want to make something that works for a wide variety of people, and treating all protein as equal is a simple approach that I think works.
-
-
-# But I Need At Least SOME Carbs!
-
-Yep, but again, *if you get enough cheap protein, you'll get the calories and fat and carbs for free*.
+# Stadem's Hierarchy of Food Needs
 
 What a great segue into my shot-from-the-hip, wholly unsubstantiated philosophy on eating:
-
-**Stadem's Hierarchy of Food Needs**
 
 In the vein of [Maslow's Hierarchy of Needs](https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs),
 I've made a list of my own personal food needs.
@@ -114,14 +99,35 @@ So yes, if you're optimizing for protein before you optimize for calories, that'
 But now that *you'll get the calories and fat and carbs for free*, the Protein Plot has killed two birds with one stone.
 Then you're free to move onto the items further back in the hierarchy.
 
-# But Nobody Needs To Solve This Problem
+# But Not all Protein is Created Equal
+
+This was the main complaint I got: Animal proteins should outrank plant proteins.
+
+**Response**: well according to [u/Ajreil](https://www.reddit.com/r/Frugal/comments/1hr3r2t/comment/m4veksa/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) and [Healthline](https://www.healthline.com/nutrition/incomplete-protein), all protein *is* created equal, so there!
+OK, it's true that not all protein is exactly equal. But the differences are complex, and different proteins are going to be different for different people, and all that. Accounting for that complexity is going to add confusion to the plot.
+Ultimately, I want to make something that works for a wide variety of people, and treating all protein as equal is a simple approach that I think works.
+
+# But This Problem Is Irrelevant
 
 Shoutout here to [u/ProtozoaPatriot](https://www.reddit.com/r/Frugal/comments/1hr3r2t/comment/m4x09g3/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button), who wrote:
 > ... you're missing the point of nutrition. Americans don't suffer insufficient Protein intake unless they have problems such as eating disorder or severe intestinal issues. What we are lacking are the micronutrients (vitamins, minerals) as well as antioxidants and fiber.
 
-Yeah, I mean, basically true. I'm solving a very small problem. 
+Yeah, granted; cheap protein is not the point of nutrition. However, you'll notice that the statement "we are lacking the micronutrients... antioxidants, and fiber" is not the point of nutrition either - it's three different points. And that's not counting the other, probably more important points of nutrition - Americans eat too much over-processed food, too much poisonous/toxic food, and too much food in general. And this I think is a very important point of nutrition: **it's too overwhelming to have to fix all those problems at once.** Even a robot gets lost in the noise when you start piling on objectives in a multi-objective optimization problem; why would we expect people to do better? It's no wonder we struggle to eat right when there's 10 different dimensions of what right even is.
 
-Now, there's evidence to suggest that higher-protein diets help you eat less food.
-But I don't think the Protein Plot is actually going to move the needle much in that direction.
+The solution isn't perfect, but it's easy. Adopt Stadem's Hierarchy of Needs, and skip right ahead to the protein plot. Water is level 1, and that's very cheap. Level 2 is calories, and remember that if you get enough cheap protein, *you'll get the calories and fat and carbs for free*, so you can skip ahead to protein. Use the protein plot to build a diet that clears Level 3 without breaking the bank - Greek yogurt, tuna, eggs, beans, rice, rotisserie chicken. Now you've made some progress. Yes there's more that you *should* do, and more that you *could* do, but you've done what you *had* to do. 
 
-Keep in mind that this is a utilitarian approach; it assumes you're a robot that just needs to hit its quota of macros so it doesn't shut down. Most people in today's world have no problem getting enough calories. Our primary problem is in our *relationship* to food. We use food not to fuel our bodies, but to relieve our anxiety or boredom.
+Not only that, optimizing for cheap protein does start moving you in the right direction when it comes to those higher-level goals.
+Beans have tons of fiber.
+
+There's even evidence to suggest that higher-protein diets increase satiation which helps you avoid over-eating, although I don't think the protein plot will actually move the needle much.
+
+The protein plot has definitely failed on one aspect: encouraging you to eat vegetables.
+So eat a bunch of vegetables.
+
+# Conclusion
+
+Does anybody want a conclusion?
+Look, you can rapidly compare protein sources by putting them on the protein plot.
+The goal is to get the *highest Protein Percentage* (further to the right) for the *lowest Protein Price* (further down).
+You'll never starve if you buy cheap protein because if you get enough cheap protein, you'll get the fat and carbs for free.
+This doesn't solve all your problems, but it answers your first question of "how do I eat enough to live?" and frees you up to ask your second question "How do I eat to live well?"

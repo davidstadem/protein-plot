@@ -6,6 +6,7 @@ import base64
 import protein_plot
 
 proteinplot = protein_plot.ProteinPlot()
+app = Dash(__name__)
 
 def plot_from_strio(strio=None):
     if strio is None:
@@ -15,10 +16,6 @@ def plot_from_strio(strio=None):
     proteinplot.make_plot()
     fig=proteinplot.add_contour(y_range=(0,11.5))
     return fig
-
-app = Dash(__name__)
-
-csv_string=''
 
 def contents_to_stringIO(contents):
     content_type, content_string = contents.split(',')
@@ -32,7 +29,6 @@ error_dict = {
         "title": None,
     }
 }
-
 
 @callback(
     Output('protein-plot', 'figure'),
@@ -68,17 +64,15 @@ def download_csv(n_clicks):
     df = proteinplot.df
     return dcc.send_data_frame(df.to_csv, "proteinplot.csv")
 
-#fig = update_graph(csvpath=protein_plot.PRICESPATH)
-
-def markdown_text():
-    with open('manifesto.md', 'r') as file:
+def markdown_text(filepath='manifesto.md'):
+    with open(filepath, 'r') as file:
         content = file.read()
     return content
 
 app.layout = html.Div([
     dcc.Upload(
         id='upload-data',
-        children=html.Div(['Drag and Drop or ', html.A('Select Files')]),
+        children=html.Div(['Upload your own file: Drag and Drop or ', html.A('Select a CSV File')]),
         style={
             'width': '100%',
             'height': '60px',
@@ -87,9 +81,9 @@ app.layout = html.Div([
             'borderStyle': 'dashed',
             'borderRadius': '5px',
             'textAlign': 'center',
-            'margin': '10px'
+            'margin': '10px',
         },
-        multiple=False  # Allow only one file to be uploaded
+        multiple=False ,
     ),
     html.Div(
         dcc.Graph(
@@ -104,8 +98,10 @@ app.layout = html.Div([
             'aspectRatio': '16/9', 
         },
     ),
-    html.Button("Download CSV!", id="download-csv"),
+    html.Button("Download this plot as a CSV file.", id="download-csv"),
     dcc.Download(id="download-dataframe-csv"),
+    dcc.Markdown(children=markdown_text('quickstart.md'),mathjax=True),  
+
     html.Img(
         src='static/protein-plot.png', 
         style={'width': '100%',}# 'float': 'right'}

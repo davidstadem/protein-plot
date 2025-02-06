@@ -10,10 +10,16 @@ Use the plot to train your instincts and figure out which foods make the best bu
 
 # Reproduce the Plot
 
-Run 
+Generate the plot like this:
 
 ```python
 python protein_plot.py
+```
+
+Run the dash app (which wraps a flask app):
+
+```python
+python dash_app.py
 ```
 
 # Development
