@@ -64,31 +64,46 @@ def download_csv(n_clicks):
     df = proteinplot.df
     return dcc.send_data_frame(df.to_csv, "proteinplot.csv")
 
-def markdown_text(filepath='manifesto.md'):
+def markdown_text(filepath):
     with open(filepath, 'r') as file:
         content = file.read()
     return content
+
+upload_download_style = {
+    'width': '100%',
+    'height': '60px',
+    'lineHeight': '60px',
+    'borderWidth': '1px',
+    'borderStyle': 'dashed',
+    'borderRadius': '5px',
+    'textAlign': 'center',
+    'margin': '10px',
+    'background-color': 'white',
+    'color': 'black', 
+}
 
 app.layout = html.Div([
     dcc.Upload(
         id='upload-data',
         children=html.Div(['Upload your own file: Drag and Drop or ', html.A('Select a CSV File')]),
-        style={
-            'width': '100%',
-            'height': '60px',
-            'lineHeight': '60px',
-            'borderWidth': '1px',
-            'borderStyle': 'dashed',
-            'borderRadius': '5px',
-            'textAlign': 'center',
-            'margin': '10px',
-        },
+        style=upload_download_style,
         multiple=False ,
+    ),
+    html.Div(
+        [
+            html.Button(
+                "Download this plot as a CSV file.",
+                id="download-csv",
+                style=upload_download_style,
+            )
+        ],
+    ),
+    dcc.Download(
+        id="download-dataframe-csv",
     ),
     html.Div(
         dcc.Graph(
             id='protein-plot', 
-            #figure=fig,
             responsive=True, 
             style={'height': '100%',},
         ),
@@ -98,15 +113,13 @@ app.layout = html.Div([
             'aspectRatio': '16/9', 
         },
     ),
-    html.Button("Download this plot as a CSV file.", id="download-csv"),
-    dcc.Download(id="download-dataframe-csv"),
     dcc.Markdown(children=markdown_text('quickstart.md'),mathjax=True),  
 
     html.Img(
         src='static/protein-plot.png', 
-        style={'width': '100%',}# 'float': 'right'}
+        style={'width': '100%',},
     ),
-    dcc.Markdown(children=markdown_text(),mathjax=True),  
+    dcc.Markdown(children=markdown_text('manifesto.md'),mathjax=True),  
 ])
 
 if __name__ == '__main__':
