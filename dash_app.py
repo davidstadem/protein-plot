@@ -6,7 +6,9 @@ import base64
 import protein_plot
 
 proteinplot = protein_plot.ProteinPlot()
-app = Dash(__name__)
+# Add external stylesheets to your Dash app
+external_stylesheets = ['/assets/style.css'] # Link to your CSS file
+app = Dash(__name__, external_stylesheets=external_stylesheets) # Initialize Dash app with stylesheets
 
 def plot_from_strio(strio=None):
     if strio is None:
@@ -69,18 +71,7 @@ def markdown_text(filepath):
         content = file.read()
     return content
 
-upload_download_style = {
-    'width': '100%',
-    'height': '60px',
-    'lineHeight': '60px',
-    'borderWidth': '1px',
-    'borderStyle': 'dashed',
-    'borderRadius': '5px',
-    'textAlign': 'center',
-    'margin': '10px',
-    'background-color': 'white',
-    'color': 'black',
-}
+# Removed upload_download_style dict as we're using CSS classes now
 
 app.layout = html.Div([
     dcc.Markdown(children='# The Protein Plot\nHi, this is the protein plot.'),
@@ -96,27 +87,31 @@ app.layout = html.Div([
             'aspectRatio': '16/9',
         },
     ),
-    dcc.Upload(
-        id='upload-data',
-        children=html.Div(['Upload your own file: Drag and Drop or ', html.A('Select a CSV File')]),
-        style=upload_download_style,
-        multiple=False ,
-    ),
-    html.Div(
-        [
-            html.Button(
-                "Download this plot as a CSV file.",
-                id="download-csv",
-                style=upload_download_style,
-            )
-        ],
-    ),
+    # Container for side-by-side buttons
+    html.Div([
+        dcc.Upload(
+            id='upload-data',
+            # Apply 'material-button' class to the clickable child of dcc.Upload
+            children=html.Div(
+                ['Upload your own file: ', html.A('Select a CSV File', className='upload-button-link')],
+                className='material-button' # This div acts as the clickable button part
+            ),
+            # Apply 'dcc-upload-container' to the dcc.Upload component itself
+            className='dcc-upload-container',
+            multiple=False ,
+        ),
+        html.Button(
+            "Download this plot as a CSV file.",
+            id="download-csv",
+            className='material-button', # Apply the 'material-button' class
+        )
+    ], style={'display': 'flex', 'justifyContent': 'center', 'margin': '10px 0'}), # Flexbox for side-by-side
     dcc.Download(
         id="download-dataframe-csv",
     ),
-    html.Img( # <--- Insert this html.Img component
-        src='static/excaliprotein.png',
-        style={'width': '50%', 'display': 'block', 'margin': 'auto', 'padding': '20px 0'}, # Example styling
+    html.Img(
+        src='static/excaliprotein.svg', # Ensure this path is correct, should be static/excaliprotein.svg if in static folder
+        style={'width': '50%', 'display': 'block', 'margin': 'auto', 'padding': '20px 0'},
     ),
     dcc.Markdown(children=markdown_text('quickstart.md'),mathjax=True),
     html.Img(

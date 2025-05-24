@@ -1,0 +1,54 @@
+/* Material Design inspired button styling */
+.material-button {
+    background-color: #2196F3; /* Material Design Blue */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px; /* Slightly rounded corners */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block; /* For side-by-side */
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20); /* Material shadow */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+    font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif; /* Add sans-serif font-family */
+    -webkit-font-smoothing: antialiased; /* For better font rendering on some browsers */
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.material-button:hover {
+    background-color: #1976D2; /* Darker blue on hover */
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.14), 0 8px 10px 1px rgba(0,0,0,0.12), 0 3px 14px 2px rgba(0,0,0,0.20);
+}
+
+.material-button:active {
+    background-color: #0D47A1; /* Even darker blue on click */
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.14), 0 8px 10px 1px rgba(0,0,0,0.12), 0 3px 14px 2px rgba(0,0,0,0.20);
+}
+
+/* Specific styling for the dcc.Upload child to make it look like the button */
+/* This targets the <a> tag inside the dcc.Upload children */
+.upload-button-link {
+    color: white; /* Match button text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make it stand out */
+    font-family: inherit; /* Ensure it inherits from parent button style */
+}
+
+/* Ensure the dcc.Upload container takes button-like styling too */
+.dcc-upload-container {
+    padding: 0; /* Remove default padding */
+    border: none; /* Remove default border */
+    background-color: transparent; /* Make background transparent to let child styling show */
+    height: auto; /* Adjust height to content */
+    line-height: normal; /* Reset line height */
+    margin: 4px 2px; /* Match button margin */
+    /* Ensure no default styles interfere with font from inner material-button */
+}
+
+/* Add a global font-family for the body to ensure consistency if not already defined */
+body {
+    font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
