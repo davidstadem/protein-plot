@@ -1,54 +1,130 @@
-/* Material Design inspired button styling */
-.material-button {
-    background-color: #2196F3; /* Material Design Blue */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px; /* Slightly rounded corners */
-    text-align: center;
-    text-decoration: none;
-    display: inline-block; /* For side-by-side */
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20); /* Material shadow */
-    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
-    font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif; /* Add sans-serif font-family */
-    -webkit-font-smoothing: antialiased; /* For better font rendering on some browsers */
-    -moz-osx-font-smoothing: grayscale;
+/* Import Roboto font from Google Fonts for consistent sans-serif */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Global body font to ensure consistency */
+body {
+    font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
+/* Material Design inspired button styling */
+.material-button {
+    background-color: #2196F3;
+    color: white;
+    padding: 0 20px; /* Horizontal padding */
+    height: 44px; /* Fixed height for consistent vertical sizing */
+    line-height: 44px; /* Vertically center single line text */
+    border: none;
+    border-radius: 4px; /* Re-apply rounded corners */
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center; /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
+    font-size: 16px;
+    font-weight: 500;
+    margin: 8px 4px; /* Consistent external margin for spacing */
+    cursor: pointer;
+    /* Apply box-shadow for general button look */
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20);
+    transition: background-color 0.3s ease-out, box-shadow 0.3s ease-out;
+    font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    user-select: none;
+    box-sizing: border-box; /* Include padding/border in element's total width/height */
+}
+
+/* Base hover/active styles for regular buttons */
 .material-button:hover {
-    background-color: #1976D2; /* Darker blue on hover */
+    background-color: #1976D2;
     box-shadow: 0 4px 4px 0 rgba(0,0,0,0.14), 0 8px 10px 1px rgba(0,0,0,0.12), 0 3px 14px 2px rgba(0,0,0,0.20);
 }
 
 .material-button:active {
+    background-color: #0D47A1;
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.14), 0 8px 10px 1px rgba(0,0,0,0.12), 0 3px 14px 2px rgba(0,0,0,0.20);
+}
+
+/* Styling for the <a> tag inside the dcc.Upload button */
+.upload-button-link {
+    color: white;
+    text-decoration: none;
+    font-weight: inherit;
+    font-family: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+/* Adjustments for the dcc.Upload component itself (the outer container) */
+.dcc-upload-container {
+    padding: 0 !important;
+    border: none !important;
+    background-color: #2196F3; /* Set initial background color here */
+    display: inline-flex;
+    height: 44px;
+    line-height: normal;
+    margin: 8px 4px;
+    box-sizing: border-box;
+    position: relative;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20);
+    border-radius: 4px;
+    overflow: hidden; /* Hide the default file input button */
+    transition: background-color 0.3s ease-out, box-shadow 0.3s ease-out; /* Apply transition here */
+}
+
+/* Hover and active states for the dcc.Upload container */
+.dcc-upload-container:hover {
+    background-color: #1976D2; /* Darker blue on hover */
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.14), 0 8px 10px 1px rgba(0,0,0,0.12), 0 3px 14px 2px rgba(0,0,0,0.20);
+}
+
+.dcc-upload-container:active {
     background-color: #0D47A1; /* Even darker blue on click */
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.14), 0 8px 10px 1px rgba(0,0,0,0.12), 0 3px 14px 2px rgba(0,0,0,0.20);
 }
 
-/* Specific styling for the dcc.Upload child to make it look like the button */
-/* This targets the <a> tag inside the dcc.Upload children */
-.upload-button-link {
-    color: white; /* Match button text color */
-    text-decoration: none; /* Remove underline */
-    font-weight: bold; /* Make it stand out */
-    font-family: inherit; /* Ensure it inherits from parent button style */
+/* Target the direct div child of dcc.Upload that we gave .material-button class */
+.dcc-upload-container .material-button {
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    /* Crucial: Remove background-color, box-shadow, border-radius, and transitions */
+    /* These styles are now handled by the parent `.dcc-upload-container` */
+    background-color: transparent; /* Make it transparent so parent background shows */
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
+    border: none;
+    line-height: normal;
+    transition: none; /* No transition on inner div, parent handles it */
 }
 
-/* Ensure the dcc.Upload container takes button-like styling too */
-.dcc-upload-container {
-    padding: 0; /* Remove default padding */
-    border: none; /* Remove default border */
-    background-color: transparent; /* Make background transparent to let child styling show */
-    height: auto; /* Adjust height to content */
-    line-height: normal; /* Reset line height */
-    margin: 4px 2px; /* Match button margin */
-    /* Ensure no default styles interfere with font from inner material-button */
+/* Ensure the text content inside the dcc.Upload button is also correctly aligned */
+.dcc-upload-container .material-button > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
 }
 
-/* Add a global font-family for the body to ensure consistency if not already defined */
-body {
-    font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+/* Optionally, hide the actual file input element that dcc.Upload creates */
+.dcc-upload-container input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1; /* Ensure it's on top to receive clicks */
+}
+
+/* For the parent div containing both buttons, ensure consistent spacing */
+.button-container {
+    display: flex;
+    justify-content: center;
 }

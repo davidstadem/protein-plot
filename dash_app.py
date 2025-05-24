@@ -95,7 +95,7 @@ app.layout = html.Div([
             id='upload-data',
             # Apply 'material-button' class to the clickable child of dcc.Upload
             children=html.Div(
-                ['Upload your own file: ', html.A('Select a CSV File', className='upload-button-link')],
+                [html.A('Upload your own file: Select a CSV File', className='upload-button-link')],
                 className='material-button' # This div acts as the clickable button part
             ),
             # Apply 'dcc-upload-container' to the dcc.Upload component itself
