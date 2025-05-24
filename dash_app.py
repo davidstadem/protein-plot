@@ -83,6 +83,19 @@ upload_download_style = {
 }
 
 app.layout = html.Div([
+    dcc.Markdown(children='# The Protein Plot\nHi, this is the protein plot.'),  
+    html.Div(
+        dcc.Graph(
+            id='protein-plot', 
+            responsive=True, 
+            style={'height': '100%',},
+        ),
+        style={
+            'width': '80%', 
+            'margin': 'auto',
+            'aspectRatio': '16/9', 
+        },
+    ),
     dcc.Upload(
         id='upload-data',
         children=html.Div(['Upload your own file: Drag and Drop or ', html.A('Select a CSV File')]),
@@ -100,18 +113,6 @@ app.layout = html.Div([
     ),
     dcc.Download(
         id="download-dataframe-csv",
-    ),
-    html.Div(
-        dcc.Graph(
-            id='protein-plot', 
-            responsive=True, 
-            style={'height': '100%',},
-        ),
-        style={
-            'width': '80%', 
-            'margin': 'auto',
-            'aspectRatio': '16/9', 
-        },
     ),
     dcc.Markdown(children=markdown_text('quickstart.md'),mathjax=True),  
 

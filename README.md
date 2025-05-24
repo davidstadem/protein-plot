@@ -25,3 +25,12 @@ python dash_app.py
 # Development
 Development is at https://github.com/davidstadem/protein-plot
 
+# TODO
+
+here is Callie's feedback May 24:
+- [ ] Where's the website??? Add the website.
+- [ ] Those aren't buttons! Make them buttons.
+- [ ] Make the instructions shorter.
+
+
+
