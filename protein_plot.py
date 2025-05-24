@@ -87,7 +87,7 @@ class ProteinPlot:
             x=.99,
             y=0.5,
             ax=0,
-            ay=-70,
+            ay=-50,
             text='Cheaper is Better',
             xanchor='right',
             #textangle=90,

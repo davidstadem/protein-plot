@@ -1,7 +1,6 @@
 Name,From,Date,Price,Number,Unit,Servings per container,Calories per serving,Fat g,Carb g,Protein g
 Brown Rice,Hugo's,4/11/2022, $2.09 ,2.0,lb,22.0,150,1.0,32.0,3
 Black beans,Sams,2025, $11.78,12.0,lb,155,80,1.0,21.0,8
-Pinto beans,Sams,2025, $9.98,12.0,lb,155,80,1.0,21.0,7
 Milk,Sam's,4/17/2022, $4.06 ,1.0,gal,16.0,150,8.0,11.0,8
 "Eggs, $3/doz",Hugo's,4/16/2022, $3.00 ,600.0,g,12.0,70,5.0,0.0,6
 Egg Whites,Hugo's,4/16/2022, $3.00 ,396.0,g,12.0,16,0.0,0.0,4
@@ -22,7 +21,6 @@ Boneless Pork Chops,,8/19/2022, $10.00 ,192.0,oz,,160,9.0,0.0,21
 tuna,Hugo's,10/2/2022, $0.75 ,1.0,can,1.0,100,0.5,0.0,23
 Spam,Walmart online,4/4/2023, $3.58 ,12.0,oz,6.0,160,14.0,1.0,7
 Huel,ad Cal Newport,6/21/2023, $2.50 ,1.0,serving,1.0,400,,,40
-Chickpeas,Target online,11/7/2023, $1.59 ,1.0,lb,13.0,100,1.0,23.0,8
 Hummus,Sam's club,11/7/2023, $4.48 ,1.0,container,32.0,60,4.5,5.0,2
 Dry Roasted Edamame,Amazon,8/10/2024, $17.59 ,1.0,big jar,26.0,130,5.0,9.0,14
 Pork Shoulder,Sams,2025, $2.48 ,1.0,lb,4.05,280,22,0,21

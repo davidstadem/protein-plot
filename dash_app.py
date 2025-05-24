@@ -1,6 +1,4 @@
-import dash
 from dash import dcc, html, Dash, Input, Output, State, callback
-import plotly.graph_objects as go
 import io
 import base64
 import protein_plot
@@ -71,8 +69,6 @@ def markdown_text(filepath):
         content = file.read()
     return content
 
-# Removed upload_download_style dict as we're using CSS classes now
-
 app.layout = html.Div([
     dcc.Markdown(children='# The Protein Plot\nHi, this is the protein plot.'),
     html.Div(
@@ -89,6 +85,12 @@ app.layout = html.Div([
     ),
     # Container for side-by-side buttons
     html.Div([
+        # Download button first for left positioning
+        html.Button(
+            "Download this plot as a CSV file.",
+            id="download-csv",
+            className='material-button', # Apply the 'material-button' class
+        ),
         dcc.Upload(
             id='upload-data',
             # Apply 'material-button' class to the clickable child of dcc.Upload
@@ -98,19 +100,14 @@ app.layout = html.Div([
             ),
             # Apply 'dcc-upload-container' to the dcc.Upload component itself
             className='dcc-upload-container',
-            multiple=False ,
+            multiple=False,
         ),
-        html.Button(
-            "Download this plot as a CSV file.",
-            id="download-csv",
-            className='material-button', # Apply the 'material-button' class
-        )
     ], style={'display': 'flex', 'justifyContent': 'center', 'margin': '10px 0'}), # Flexbox for side-by-side
     dcc.Download(
         id="download-dataframe-csv",
     ),
     html.Img(
-        src='static/excaliprotein.svg', # Ensure this path is correct, should be static/excaliprotein.svg if in static folder
+        src='static/excaliprotein.png',
         style={'width': '50%', 'display': 'block', 'margin': 'auto', 'padding': '20px 0'},
     ),
     dcc.Markdown(children=markdown_text('quickstart.md'),mathjax=True),
