@@ -52,8 +52,11 @@ class ProteinPlot:
         self.df=pd.read_csv(path)
 
     def clean_df(self):
+        from pandas.api.types import is_numeric_dtype
+
         df=self.df
-        df['Price'] = df['Price'].apply(cleandollars)
+        if not is_numeric_dtype(df['Price']):
+            df['Price'] = df['Price'].apply(cleandollars)
         df['DPG'] = df.apply(price_per_g_protein, axis=1)*100
         df['PCP'] = df.apply(proteindensity, axis=1)
         df['CalcCals'] = df.apply(totalcalories, axis=1)
