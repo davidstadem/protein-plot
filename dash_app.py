@@ -79,21 +79,21 @@ upload_download_style = {
     'textAlign': 'center',
     'margin': '10px',
     'background-color': 'white',
-    'color': 'black', 
+    'color': 'black',
 }
 
 app.layout = html.Div([
-    dcc.Markdown(children='# The Protein Plot\nHi, this is the protein plot.'),  
+    dcc.Markdown(children='# The Protein Plot\nHi, this is the protein plot.'),
     html.Div(
         dcc.Graph(
-            id='protein-plot', 
-            responsive=True, 
+            id='protein-plot',
+            responsive=True,
             style={'height': '100%',},
         ),
         style={
-            'width': '80%', 
+            'width': '80%',
             'margin': 'auto',
-            'aspectRatio': '16/9', 
+            'aspectRatio': '16/9',
         },
     ),
     dcc.Upload(
@@ -114,13 +114,16 @@ app.layout = html.Div([
     dcc.Download(
         id="download-dataframe-csv",
     ),
-    dcc.Markdown(children=markdown_text('quickstart.md'),mathjax=True),  
-
+    html.Img( # <--- Insert this html.Img component
+        src='static/excaliprotein.png',
+        style={'width': '50%', 'display': 'block', 'margin': 'auto', 'padding': '20px 0'}, # Example styling
+    ),
+    dcc.Markdown(children=markdown_text('quickstart.md'),mathjax=True),
     html.Img(
-        src='static/protein-plot.png', 
+        src='static/protein-plot.png',
         style={'width': '100%',},
     ),
-    dcc.Markdown(children=markdown_text('manifesto.md'),mathjax=True),  
+    dcc.Markdown(children=markdown_text('manifesto.md'),mathjax=True),
 ])
 
 if __name__ == '__main__':
