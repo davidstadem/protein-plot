@@ -1,22 +1,27 @@
-# Quick Start
+# Quick Start Guide: The Protein Plot
 
-1. Go to the [website](https://stadem.pythonanywhere.com), or just download [the default plot image file](https://stadem.pythonanywhere.com/static/protein-plot.png). 
+This guide helps you use the Protein Plot website and create your own customized plots.
 
-**To make your own plot**:
+## Option 1: View the Default Plot
 
-2. **Download the Nutrition Facts** used in this plot as a CSV file.
-3. **Add your own foods** to the CSV file using Nutrition Facts for each food.
-    - Here are all the columns in my CSV: `Name,From,Date,Price,Number,Unit,Servings per container,Calories per serving,Fat g,Carb g,Protein g`
-    - You need at a minimum the following columns: `Name,Price,Servings per container,Calories per serving,Protein g`
-4. **Upload the CSV** file back to the website. The protein plot automatically updates.Click the Upload button, or drag-n-drop your own file onto the button.
-5. **Download your custom Protein Plot**: hover over the new protein plot. A camera image shows up with the hover data 'Download plot as a png'. Click to save the plot. 
+1.  Go to the [Protein Plot website](https://stadem.pythonanywhere.com).
+2.  You can also directly download [the default plot image](https://stadem.pythonanywhere.com/static/protein-plot.png).
 
-I'd like to make the process much easier, but I'll need some more time to get that going. Then it'll be a 3 step process. Go to the website, click around to change prices, and export your results. 
+## Option 2: Create Your Own Custom Plot
 
-# Notes
+1.  **Download the Nutrition Facts:**
+    * Click the 'Download' button to download my CSV file containing nutrition facts. This file includes columns like: `Name,From,Date,Price,Number,Unit,Servings per container,Calories per serving,Fat g,Carb g,Protein g`. 
+2.  **Add Your Own Foods:**
+    * **Open the CSV file** in a spreadsheet editor.
+    * **Add nutritional information** for your new foods. At minimum, fill in these columns: `Name,Price,Servings per container,Calories per serving,Protein g`. The `Servings per container` value is important - make sure it's right! This value is the number of servings you're getting for the price you enter.
+    * **Update or remove existing foods:** You can change prices or remove rows for foods already listed.
+    * ***Note:*** Columns like `From, Date, Number, Unit` are for your reference and don't affect the plot calculations. 
+3.  **Re-generate Your Custom Plot:**
+    * Return to the [Protein Plot website](https://stadem.pythonanywhere.com).
+    * Upload your modified CSV file. You can click the "Upload" button or drag and drop the file onto the button.
+    * The website will automatically generate your custom Protein Plot.
+4.  **Download Your Plot:**
+    * Hover your mouse over the newly generated plot on the website.
+    * A camera icon will appear with the tooltip "Download plot as a png". Click this icon to save your custom plot.
 
-- in the CSV, you can delete rows for foods that you don't want. 
-- You can just go in and update the price in the CSV. I've already entered in the nutrition facts. 
-- Certain columns (From, Date, Number, Unit) won't impact the calculation at all. They're just for information. 
-- The key is Servings Per Container. You need the right number for how many servings you're getting when you spend *x* amount of money. 
-
+**Future Goal:** I hope to add functionality to the website itself. Then you could just visit the website, click around to add or change prices, and export your results.
