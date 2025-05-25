@@ -1,10 +1,7 @@
-# Intro
-This is the Protein Plot, a tool to help you identify cheap protein. You can use cheap protein as the driver for cheap food.
 
+# About the Protein Plot
 
-# How I got here
-
-So I'm putting together the grocery list  for the billionth time, or else wandering through the store for the billionth time,
+So I'm putting together the grocery list for the billionth time, or else wandering through the store for the billionth time,
 or sticking my head in the fridge for the billionth time.
 What to eat? What to buy?
 I know there's a tradeoff between good food and cheap food, and I know there's some food that's both good *and* cheap.
@@ -16,7 +13,7 @@ I collected the prices and Nutrition Facts of a bunch of different foods.
 I calculated two numbers: the Protein Price and the Protein Percentage. 
 Why those two numbers? Because *if you get enough cheap protein, you'll get the calories and fat and carbs for free*.
 
-# How to Use It
+## How to Use It
 
 The goal is to get the *highest Protein Percentage* (further to the right) for the *lowest Protein Price* (further down).
 Use the plot to train your instincts and figure out which foods make the best building blocks of a frugal meal plan.
@@ -27,7 +24,7 @@ Use the plot to train your instincts and figure out which foods make the best bu
 - Pork chops are better than ground beef.
 - As far as dry beans go, chickpeas are a little better than black beans, but they're close.
 
-# How to Make It
+## How to Make It
 I gathered prices and Nutrition Facts over the course of a couple years. I live in North Dakota and shop mostly at Sam's Club, and I gathered these prices mostly in 2022. Your mileage may vary.
 
 Formulas are pretty straightforward:
@@ -37,45 +34,41 @@ $Protein\ Density = \frac{g\ Protein\ per\ serving \times 4}{Calories\ per\ serv
 $\$\ per\ 100g\ Protein = \frac{Container\ Price}{Servings\ per\ container\ \times\ g\ Protein\ per\ serving}\times 100$
 
 
-# Conclusion
+## Conclusion
 
 See this site at https://github.com/davidstadem/protein-plot
 
-------------------------
+# Don't Wait, but There's More (FAQ)
 
-If you're still reading, maybe you have some burning questions or Important Stuff That You Need To Tell Me.
-Perhaps you're interested in some rambly half-baked attempts to answer those questions! 
+Perhaps you're interested in some rambly half-baked attempts to answer said burning questions! 
 
 On New Year's Day, 2025, I posted this [on Reddit](https://www.reddit.com/r/Frugal/comments/1hr3r2t/the_protein_plot_cheap_food_is_basically_cheap/).
 I got some great feedback.
 Below is a bunch of rambly FAQ stuff that didn't make it into the post, as well as feedback from the post.
 
-------------------------
 
-# If you get enough cheap protein, you'll get the calories and fat and carbs for free
+## If you get enough cheap protein, you'll get the calories and fat and carbs for free
 
-What's the definition of cheap food? Price per pound?
-That's silly, you can just pump a bunch of water into a food for more or less free,
-so the cheapest foods are just the ones with the most water. That's not right.
+How do you define cheap food? Price per pound?
+That definition breaks down: the cheapest foods are just the ones with the most water. That's not right.
 
 What about price per calorie?
-I'm an energy engineer, which means I like to think about prices of different forms of energy,
-from coal $1/GJ to electricity $30/GJ.
+I'm an energy engineer, which means I like to think about prices of different forms of fuels and,
+from coal ($1-3/GJ) to natural gas ($3-6/GJ) to gasoline ($20/GJ) to electricity ($30/GJ).
 The problem there is that optimizing a diet based on energy doesn't work well.
 A calorie (kcal) is 4.184 kJ, so there are about 240,000 calories in a GJ.
 Turns out brown rice, the cheapest calorie source, is $150/GJ, and beef jerky is closer to $3,000/GJ.
 So brown rice wins.
 And as it turns out, all the carb-rich and fat-rich foods win at the cheap-energy game.
+Even pure carbs and pure fat are cheap. Pure white sugar is very cheap per gram of carbs ($1/lb is roughly $180/GJ), and pure oil is cheap per gram of fat ($10/gallon is roughly $70/GJ).
+
+What surprised me is that the more protein-rich a food is, *the more you pay for that protein*.
+There aren't really any pure protein sources, and the more you concentrate the protein, the more expensive it gets.
 Carbs and fat are *way* cheaper than protein on an energy basis.
+So much so that if you want to get the cheapest protein, you're going to buy foods like black beans and peanut butter that have some protein but are also packed with carbs and fat.
+Ultimately, this is why you don't need to buy fat and carbs because *if you get enough cheap protein, you'll get the fat and carbs for free*.
 
-In fact, carbs and fat are so much cheaper that if you
-What surprised me is that the more protein-rich a food is, the more you pay for that protein.
-Carbs and fat are the opposite. Pure carbs, i.e. flour or sugar, is cheap per gram of carbs, and pure oil is cheap per gram of fat.
-But protein doesn't work that way. There aren't really any pure protein sources, and the more you concentrate the protein, the more expensive it gets.
-This means that when it comes to eating cheaply, the most important macronutrient is protein.
-Specifically, you don't need to buy fat and carbs because *if you get enough cheap protein, you'll get the fat and carbs for free*.
-
-# Stadem's Hierarchy of Food Needs
+## Stadem's Hierarchy of Food Needs
 
 What a great segue into my shot-from-the-hip, wholly unsubstantiated philosophy on eating:
 
@@ -99,7 +92,7 @@ So yes, if you're optimizing for protein before you optimize for calories, that'
 But now that *you'll get the calories and fat and carbs for free*, the Protein Plot has killed two birds with one stone.
 Then you're free to move onto the items further back in the hierarchy.
 
-# But Not all Protein is Created Equal
+## But Not all Protein is Created Equal
 
 This was the main complaint I got: Animal proteins should outrank plant proteins.
 
@@ -107,9 +100,9 @@ This was the main complaint I got: Animal proteins should outrank plant proteins
 OK, it's true that not all protein is exactly equal. But the differences are complex, and different proteins are going to be different for different people, and all that. Accounting for that complexity is going to add confusion to the plot.
 Ultimately, I want to make something that works for a wide variety of people, and treating all protein as equal is a simple approach that I think works.
 
-# But This Problem Is Irrelevant
+## But This Problem Is Irrelevant
 
-Shoutout here to [u/ProtozoaPatriot](https://www.reddit.com/r/Frugal/comments/1hr3r2t/comment/m4x09g3/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button), who wrote:
+[u/ProtozoaPatriot](https://www.reddit.com/r/Frugal/comments/1hr3r2t/comment/m4x09g3/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) wrote:
 > ... you're missing the point of nutrition. Americans don't suffer insufficient Protein intake unless they have problems such as eating disorder or severe intestinal issues. What we are lacking are the micronutrients (vitamins, minerals) as well as antioxidants and fiber.
 
 Yeah, granted; cheap protein is not the point of nutrition. However, you'll notice that the statement "we are lacking the micronutrients... antioxidants, and fiber" is not the point of nutrition either - it's three different points. And that's not counting the other, probably more important points of nutrition - Americans eat too much over-processed food, too much poisonous/toxic food, and too much food in general. And this I think is a very important point of nutrition: **it's too overwhelming to have to fix all those problems at once.** Even a robot gets lost in the noise when you start piling on objectives in a multi-objective optimization problem; why would we expect people to do better? It's no wonder we struggle to eat right when there's 10 different dimensions of what right even is.
@@ -124,10 +117,9 @@ There's even evidence to suggest that higher-protein diets increase satiation wh
 The protein plot has definitely failed on one aspect: encouraging you to eat vegetables.
 So eat a bunch of vegetables.
 
-# Conclusion
+## In Summary
 
-Does anybody want a conclusion?
-Look, you can rapidly compare protein sources by putting them on the protein plot.
+You can rapidly compare protein sources by putting them on the protein plot.
 The goal is to get the *highest Protein Percentage* (further to the right) for the *lowest Protein Price* (further down).
 You'll never starve if you buy cheap protein because if you get enough cheap protein, you'll get the fat and carbs for free.
 This doesn't solve all your problems, but it answers your first question of "how do I eat enough to live?" and frees you up to ask your second question "How do I eat to live well?"
