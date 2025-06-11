@@ -187,6 +187,8 @@ def make_fig_easy():
         title='Cheap Protein Plot',
         margin=dict(
             r=5,
+            b=5,
+            t=5,
         )
     )
     df=proteinplot.df

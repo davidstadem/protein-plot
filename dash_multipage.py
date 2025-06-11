@@ -31,36 +31,6 @@ def markdown_text(filepath):
     # Create placeholder files if they don't exist, for demonstration
     if not os.path.exists(filepath):
         default_content = f"## Placeholder for {os.path.basename(filepath)}\n\nThis is default content. Please create `{filepath}` with your actual text."
-        if filepath == "basic.md":
-            default_content = """## How to Use This Site
-
-This website provides tools and information for protein analysis.
-
-* **Home:** You are here! This page shows a general overview and a static representation of a protein plot.
-* **Interactive Plot:** Navigate here to upload your own data and generate interactive protein plots. You can also download sample data.
-* **About:** Learn more about the project, its goals, and methodology.
-"""
-        elif filepath == "quickstart.md":
-            default_content = """## Interactive Plot: Quick Start
-
-1.  **Upload Data:** Click the "Upload your own file" button and select a CSV file containing your protein data. The format should be compatible with the plotting tool.
-2.  **View Plot:** The plot will update automatically with your data.
-3.  **Download Data:** If you want to download the data currently displayed in the plot (either the default or your uploaded data), click the "Download this plot as a CSV file" button.
-
-*Ensure your CSV has the correct columns for analysis.*
-"""
-        elif filepath == "manifesto.md":
-            default_content = """## About: The Protein Plot Project
-
-This project aims to provide accessible and powerful tools for visualizing protein data.
-Our goal is to facilitate research and understanding in proteomics through interactive and intuitive visualizations.
-
-### Mission
-To democratize protein data analysis.
-
-### Technology
-Built with Python, Dash, and Plotly.
-"""
         try:
             with open(filepath, 'w') as f:
                 f.write(default_content)
@@ -97,20 +67,14 @@ layout_home = html.Div([
     dcc.Markdown(children=markdown_text('basic.md')),
     html.H3("Static Protein Plot Overview"),
     html.Img(
-        src='/static/protein-plot.png', # Assuming image moved to assets or static serving configured
+        src='/static/protein-plot.png',
         alt="Static Protein Plot",
         style={'width': '80%', 'display': 'block', 'margin': 'auto', 'padding': '20px 0', 'border': '1px solid #ddd'}
-    ),
-    html.Img(
-        src='/static/excaliprotein.png', # Assuming image moved to assets
-        alt="Excaliprotein Logo",
-        style={'width': '40%', 'display': 'block', 'margin': '20px auto', 'padding': '10px 0'}
     ),
 ])
 
 # Page 2: About
 layout_about = html.Div([
-    html.H1("About This Project"),
     dcc.Markdown(children=markdown_text('manifesto.md'), mathjax=True),
 ])
 
@@ -165,7 +129,6 @@ error_dict_template = {
 
 layout_interactive = html.Div([
     html.H1("Interactive Protein Plot"),
-    dcc.Markdown(children=markdown_text('quickstart.md'), mathjax=True),
     html.Div(
         dcc.Graph(
             id='protein-plot-interactive', # Changed ID to avoid conflict if any old component remains
@@ -175,8 +138,8 @@ layout_interactive = html.Div([
         style={
             'width': '90%', # Adjusted width
             'margin': 'auto',
-            'height': '600px', # Explicit height can be good
-            # 'aspectRatio': '16/9', # Can conflict with explicit height
+            'height': '500px', # Explicit height can be good
+            'aspectRatio': '16/9', # Can conflict with explicit height
         },
     ),
     html.Div([
@@ -196,7 +159,17 @@ layout_interactive = html.Div([
         ),
     ], style={'display': 'flex', 'justifyContent': 'center', 'gap': '20px', 'margin': '20px 0'}),
     dcc.Download(id="download-dataframe-csv-interactive"),
-    html.Div(id='error-message-div', style={'textAlign': 'center', 'color': 'red', 'marginTop': '10px'})
+    html.Div(
+        id='error-message-div', style={'textAlign': 'center', 'color': 'red', 'marginTop': '10px'}
+    ),
+    dcc.Markdown(
+        children=markdown_text('quickstart.md'), mathjax=True
+    ),
+    html.Img(
+        src='/static/excaliprotein.png',
+        alt="Excaliprotein Logo",
+        style={'width': '40%', 'display': 'block', 'margin': '20px auto', 'padding': '10px 0'}
+    ),
 ])
 
 # --- App Layout with Navigation ---
