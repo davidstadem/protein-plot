@@ -13,6 +13,6 @@ if project_home not in sys.path:
     sys.path = [project_home] + sys.path
 
 # import flask app but need to call it "application" for WSGI to work
-from dash_app import app
+from dash_multipage import app
 application = app.server
 
