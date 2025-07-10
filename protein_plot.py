@@ -12,7 +12,7 @@ CALS_PER_G = {
 }
 
 def cleandollars(s):
-    return float(s.strip().strip('$'))
+    return float(str(s).strip().strip('$'))
 
 def price_per_g_protein(ser):
     priceperserving = ser['Price']/ser['Servings per container']

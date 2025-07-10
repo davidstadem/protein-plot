@@ -19,7 +19,6 @@ except ImportError:
     # Create a dummy ProteinPlot class if needed for the page to run without the file
     class DummyProteinPlot:
         def __init__(self):
-            # Start with a basic DataFrame structure
             self.df = pd.DataFrame(columns=['Name', 'Price', 'Servings per container', 'Calories per serving', 'Fat g', 'Carb g', 'Protein g'])
         def read_df(self, strio): 
             self.df = pd.read_csv(strio)
@@ -45,20 +44,28 @@ def markdown_text(filepath):
         print(f"Error reading markdown file {filepath}: {e}")
         return f"Error reading {filepath}."
 
-# Helper function to generate plot from data
-def plot_from_strio(strio=None):
+# Helper function to generate plot from data, now accepts user data
+def generate_plot(base_strio=None, user_data=None):
     if proteinplot_instance is None:
         return {"data": [], "layout": {"title": "Plotting module not loaded."}}
     
-    strio_path = strio if strio is not None else PRICESPATH
-    
+    # Determine the base data to load
+    strio_path = base_strio if base_strio is not None else PRICESPATH
     if strio_path is None:
         from io import StringIO
         dummy_csv = "Name,Price,Servings per container,Calories per serving,Fat g,Carb g,Protein g\nProteinA,10,1,100,5,10,15\nProteinB,20,1,200,10,20,30"
         strio_path = StringIO(dummy_csv)
         print("Using dummy CSV data for initial plot as PRICESPATH is not available.")
 
+    # Load base data
     proteinplot_instance.read_df(strio_path)
+    
+    # Append user-added data if it exists
+    if user_data:
+        df_user = pd.DataFrame(user_data)
+        proteinplot_instance.append_newdata(df_user)
+
+    # Generate the plot
     proteinplot_instance.clean_df()
     proteinplot_instance.make_plot()
     fig = proteinplot_instance.add_contour(y_range=(0, 11.5))
@@ -87,15 +94,21 @@ dash.register_page(__name__, path='/interactive', name='Interactive Plot', title
 
 # --- Page Layout ---
 TABLE_COLUMNS = ['Name', 'Price', 'Servings per container', 'Calories per serving', 'Fat g', 'Carb g', 'Protein g']
+EMPTY_TABLE_DATA = [{col: '' for col in TABLE_COLUMNS} for i in range(3)]
 
 layout = html.Div([
+    # This component stores user-added data in their browser session
+    dcc.Store(id='user-data-store', storage_type='session'),
+
     html.H1("Interactive Protein Plot"),
-    dcc.Graph(id='protein-plot-interactive', responsive=True, figure=plot_from_strio()),
+    # The graph is now inside a container for easier updates
+    html.Div(id='plot-container', children=[dcc.Graph(id='protein-plot-interactive', responsive=True)]),
+    
     html.Div([
         html.Button("Download Plot Data (CSV)", id="download-csv-interactive", className='material-button'),
         dcc.Upload(
             id='upload-data-interactive',
-            children=html.Div(['Upload New CSV File'], className='material-button upload-button-link'),
+            children=html.Div(['Upload New CSV File (Resets Plot)'], className='material-button upload-button-link'),
             className='dcc-upload-container', multiple=False,
         ),
     ], style={'display': 'flex', 'justifyContent': 'center', 'gap': '20px', 'margin': '20px 0'}),
@@ -105,22 +118,17 @@ layout = html.Div([
     # --- New Data Table Section ---
     html.Hr(),
     html.H3("Add Your Own Foods"),
-    html.P("Enter the details for new food items below. Click 'Add Row' to create more entries and 'Add Foods to Plot' to update the graph."),
-# --- In pages/interactive_view.py ---
-
-# ... inside your layout definition ...
+    html.P("Enter food details below. Click 'Add Foods to Plot' to update the graph. Data persists on refresh."),
     dash_table.DataTable(
         id='add-food-table',
-        columns=[{"name": i, "id": i, "deletable": False, "renamable": False} for i in TABLE_COLUMNS],
-        data=[{col: '' for col in TABLE_COLUMNS} for i in range(3)], # Start with 3 empty rows
-        editable=True,         # This is all you need for adding/editing rows
-        row_deletable=True,    # This correctly enables row deletion
-        # REMOVE a row_addable=True,
+        columns=[{"name": i, "id": i} for i in TABLE_COLUMNS],
+        data=EMPTY_TABLE_DATA,
+        editable=True,
+        row_deletable=True,
         style_cell={'textAlign': 'left', 'padding': '5px'},
         style_header={'backgroundColor': 'rgb(230, 230, 230)', 'fontWeight': 'bold'},
         style_data_conditional=[{'if': {'row_index': 'odd'}, 'backgroundColor': 'rgb(248, 248, 248)'}]
     ),
-# ...
     html.Button('Add Foods to Plot', id='add-foods-button', n_clicks=0, className='material-button', style={'marginTop': '10px'}),
     html.Hr(),
 
@@ -131,93 +139,77 @@ layout = html.Div([
     ),
 ])
 
-# --- Callbacks ---
-
+# --- Main Callback to control the page ---
 @callback(
-    [Output('protein-plot-interactive', 'figure', allow_duplicate=True),
-     Output('error-message-div', 'children')],
-    [Input('upload-data-interactive', 'contents')],
-    [State('upload-data-interactive', 'filename')],
-    prevent_initial_call=True
-)
-def update_graph_from_upload(contents, filename):
-    # This callback resets the plot with a new file
-    if contents is None:
-        return no_update, no_update
-
-    strio = contents_to_stringIO(contents)
-    if isinstance(strio, io.StringIO):
-        try:
-            fig_data = plot_from_strio(strio)
-            return fig_data, ""
-        except Exception as e:
-            error_msg = f"Error generating plot from uploaded file '{filename}': {e}"
-            rdict = dict(error_dict_template)
-            rdict['layout']['annotations'][0]['text'] = f"Error: {e}"
-            rdict['layout']['title'] = f"Failed to plot {filename}"
-            return rdict, error_msg
-    else:
-        error_msg = f"Error processing uploaded file '{filename}'."
-        rdict = dict(error_dict_template)
-        rdict['layout']['annotations'][0]['text'] = "Invalid file content."
-        rdict['layout']['title'] = "File Processing Error"
-        return rdict, error_msg
-
-@callback(
-    Output('protein-plot-interactive', 'figure', allow_duplicate=True),
+    Output('plot-container', 'children'),
+    Output('user-data-store', 'data'),
+    Output('add-food-table', 'data'),
+    Output('error-message-div', 'children'),
+    Input('upload-data-interactive', 'contents'),
     Input('add-foods-button', 'n_clicks'),
+    State('upload-data-interactive', 'filename'),
     State('add-food-table', 'data'),
-    prevent_initial_call=True
+    State('user-data-store', 'data'),
+    # This dummy input ensures the callback runs on page load to load stored data
+    Input('plot-container', 'id') 
 )
-def add_foods_to_plot(n_clicks, rows):
-    # This callback appends data from the table to the existing plot
-    if not rows:
-        return no_update
+def update_plot_and_store(contents, n_clicks, filename, table_rows, stored_data, _):
+    # Determine what triggered the callback
+    ctx = dash.callback_context
+    triggered_id = ctx.triggered[0]['prop_id'].split('.')[0] if ctx.triggered else 'initial_load'
 
-    # Filter out empty rows where 'Name' is not specified
-    valid_rows = [row for row in rows if row.get('Name')]
-    if not valid_rows:
-        return no_update
+    error_msg = ""
+    user_data = stored_data or []
+    new_table_data = no_update
+    fig = no_update
 
-    dfnew = pd.DataFrame(valid_rows)
+    if triggered_id == 'upload-data-interactive' and contents:
+        # A new file upload RESETS everything
+        user_data = [] # Clear stored data
+        new_table_data = EMPTY_TABLE_DATA # Reset table
+        strio = contents_to_stringIO(contents)
+        if isinstance(strio, io.StringIO):
+            fig = generate_plot(base_strio=strio, user_data=None)
+        else:
+            error_msg = f"Error processing uploaded file '{filename}'."
+            fig = generate_plot(user_data=None) # Show default plot on error
+    
+    elif triggered_id == 'add-foods-button' and table_rows:
+        # Add new rows from the table to the stored data
+        valid_rows = [row for row in table_rows if row.get('Name')]
+        dfnew = pd.DataFrame(valid_rows)
+        
+        # Clean and validate new data before adding
+        for col in ['Price', 'Servings per container', 'Calories per serving', 'Fat g', 'Carb g', 'Protein g']:
+            dfnew[col] = pd.to_numeric(dfnew[col], errors='coerce')
+        dfnew.dropna(subset=['Price', 'Servings per container', 'Protein g', 'Name'], inplace=True)
+        
+        if not dfnew.empty:
+            # Combine with existing stored data
+            user_data.extend(dfnew.to_dict('records'))
+            new_table_data = EMPTY_TABLE_DATA # Clear the input table
+        
+        fig = generate_plot(user_data=user_data)
 
-    if hasattr(proteinplot_instance, 'append_newdata'):
-        try:
-            # Convert columns to numeric, turning errors into Not a Number (NaN)
-            for col in ['Price', 'Servings per container', 'Calories per serving', 'Fat g', 'Carb g', 'Protein g']:
-                dfnew[col] = pd.to_numeric(dfnew[col], errors='coerce')
+    else: # Initial page load
+        fig = generate_plot(user_data=user_data)
 
-            # Drop rows where essential numeric data couldn't be parsed
-            dfnew.dropna(subset=['Price', 'Servings per container', 'Protein g', 'Name'], inplace=True)
+    # Always return a full dcc.Graph component to prevent layout breaks
+    graph_component = dcc.Graph(id='protein-plot-interactive', responsive=True, figure=fig)
+    return graph_component, user_data, new_table_data, error_msg
 
-            if not dfnew.empty:
-                proteinplot_instance.append_newdata(dfnew)
-                # After appending, regenerate the plot from the modified internal data
-                proteinplot_instance.clean_df()
-                proteinplot_instance.make_plot()
-                proteinplot_instance.debugprintdf()
-                fig = proteinplot_instance.add_contour(y_range=(0, 11.5))
-                return fig
-            else:
-                return no_update # No valid new rows were added
-        except Exception as e:
-            print(f"Error appending new data: {e}")
-            return no_update
-    else:
-        print("Warning: proteinplot_instance.append_newdata(df) method not found.")
-        return no_update
-
+# --- Download Callback ---
 @callback(
     Output("download-dataframe-csv-interactive", "data"),
     Input("download-csv-interactive", "n_clicks"),
     prevent_initial_call=True,
 )
 def download_csv_interactive(n_clicks):
+    # The proteinplot_instance is now a global-like object updated by the main callback
     if proteinplot_instance and hasattr(proteinplot_instance, 'df') and proteinplot_instance.df is not None:
         try:
             return dcc.send_data_frame(proteinplot_instance.df.to_csv, "proteinplot_data.csv", index=False)
         except Exception as e:
             print(f"Error preparing CSV for download: {e}")
             return None
-    print("No data frame available for download or proteinplot_instance not ready.")
     return None
