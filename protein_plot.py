@@ -172,6 +172,15 @@ class ProteinPlot:
         self.fig = fig
         return fig
 
+    def append_newdata(self, dfnew):
+        self.dfnew = dfnew
+        dftotal = pd.concat([self.df,dfnew],ignore_index=True)
+        self.df = dftotal
+        self.clean_df()
+    
+    def debugprintdf(self):
+        print(self.df)
+        print(self.df.iloc[-1])
 
 
 def make_fig_easy():
