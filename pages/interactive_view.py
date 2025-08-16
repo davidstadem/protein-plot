@@ -96,41 +96,55 @@ dash.register_page(__name__, path='/interactive', name='Interactive Plot', title
 TABLE_COLUMNS = ['Name', 'Price', 'Servings per container', 'Calories per serving', 'Fat g', 'Carb g', 'Protein g']
 EMPTY_TABLE_DATA = [{col: '' for col in TABLE_COLUMNS} for i in range(3)]
 
-layout = html.Div([
+layout = html.Div(className='page-container', children=[
     # This component stores user-added data in their browser session
     dcc.Store(id='user-data-store', storage_type='session'),
 
     html.H1("Interactive Protein Plot"),
-    # The graph is now inside a container for easier updates
-    html.Div(id='plot-container', children=[dcc.Graph(id='protein-plot-interactive', responsive=True)]),
+
+    # Section 1: The Plot
+    html.Div(id='plot-container', className='plot-container', children=[
+        dcc.Graph(
+            id='protein-plot-interactive', 
+            responsive=True,
+            style={'height': '70vh', 'width': '100%'} # This line fixes the overlap
+        )
+    ]),
     
-    html.Div([
-        html.Button("Download Plot Data (CSV)", id="download-csv-interactive", className='material-button'),
-        dcc.Upload(
-            id='upload-data-interactive',
-            children=html.Div(['Upload New CSV File (Resets Plot)'], className='material-button upload-button-link'),
-            className='dcc-upload-container', multiple=False,
-        ),
-    ], style={'display': 'flex', 'justifyContent': 'center', 'gap': '20px', 'margin': '20px 0'}),
+    # Section 2: Controls (Buttons)
+    html.Div(className='controls-container', children=[
+        html.Div(className='button-group', children=[
+            html.Button("Download Plot Data (CSV)", id="download-csv-interactive", className='material-button'),
+            dcc.Upload(
+                id='upload-data-interactive',
+                children=html.Div(['Upload New CSV File (Resets Plot)'], className='material-button upload-button-link'),
+                className='dcc-upload-container', 
+                multiple=False,
+            ),
+        ]),
+    ]),
     dcc.Download(id="download-dataframe-csv-interactive"),
-    html.Div(id='error-message-div', style={'textAlign': 'center', 'color': 'red', 'marginTop': '10px'}),
+    html.Div(id='error-message-div', style={'textAlign': 'center', 'color': 'red'}),
     
-    # --- New Data Table Section ---
-    html.Hr(),
-    html.H3("Add Your Own Foods"),
-    html.P("Enter food details below. Click 'Add Foods to Plot' to update the graph. Data persists on refresh."),
-    dash_table.DataTable(
-        id='add-food-table',
-        columns=[{"name": i, "id": i} for i in TABLE_COLUMNS],
-        data=EMPTY_TABLE_DATA,
-        editable=True,
-        row_deletable=True,
-        style_cell={'textAlign': 'left', 'padding': '5px'},
-        style_header={'backgroundColor': 'rgb(230, 230, 230)', 'fontWeight': 'bold'},
-        style_data_conditional=[{'if': {'row_index': 'odd'}, 'backgroundColor': 'rgb(248, 248, 248)'}]
-    ),
-    html.Button('Add Foods to Plot', id='add-foods-button', n_clicks=0, className='material-button', style={'marginTop': '10px'}),
-    html.Hr(),
+    # Section 3: Data Table for adding food
+    html.Div(className='data-table-container', children=[
+        html.Hr(style={'width': '100%'}),
+        html.H3("Add Your Own Foods"),
+        html.P("Enter food details below. Click 'Add Foods to Plot' to update the graph. Data persists on refresh."),
+        dash_table.DataTable(
+            id='add-food-table',
+            columns=[{"name": i, "id": i} for i in TABLE_COLUMNS],
+            data=EMPTY_TABLE_DATA,
+            editable=True,
+            row_deletable=True,
+            style_cell={'textAlign': 'left', 'padding': '5px'},
+            style_header={'backgroundColor': 'rgb(230, 230, 230)', 'fontWeight': 'bold'},
+            style_data_conditional=[{'if': {'row_index': 'odd'}, 'backgroundColor': 'rgb(248, 248, 248)'}],
+            style_table={'width': '100%', 'minWidth': '100%'}
+        ),
+        html.Button('Add Foods to Plot', id='add-foods-button', n_clicks=0, className='material-button'),
+        html.Hr(style={'width': '100%'}),
+    ]),
 
     dcc.Markdown(children=markdown_text('quickstart.md'), mathjax=True),
     html.Img(
@@ -195,7 +209,12 @@ def update_plot_and_store(contents, n_clicks, filename, table_rows, stored_data,
         fig = generate_plot(user_data=user_data)
 
     # Always return a full dcc.Graph component to prevent layout breaks
-    graph_component = dcc.Graph(id='protein-plot-interactive', responsive=True, figure=fig)
+    graph_component = dcc.Graph(
+        id='protein-plot-interactive', 
+        responsive=True, 
+        figure=fig,
+        style={'height': '70vh', 'width': '100%'}
+    )
     return graph_component, user_data, new_table_data, error_msg
 
 # --- Download Callback ---

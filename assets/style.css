@@ -1,76 +1,120 @@
-
 /* Global body font to ensure consistency */
 body {
     font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+/* This is the main container for the interactive page content */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    /* This is the key: stack all direct children vertically */
+    align-items: center;
+    /* Center the content horizontally */
+    padding: 2rem;
+    gap: 2rem;
+    /* Adds consistent spacing between all sections */
+    max-width: 1200px;
+    margin: 0 auto;
+    /* Center the container itself on the page */
+}
+
+/* --- Section Styling --- */
+/* Make sure each major section takes up the full width of the container */
+.plot-container,
+.controls-container,
+.data-table-container {
+    width: 100%;
+    display: flex;
+    /* Use flexbox for children of these containers too */
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 /* Material Design inspired button styling */
 .material-button {
     background-color: #2196F3;
     color: white;
-    padding: 0 20px; /* Horizontal padding */
-    height: 44px; /* Fixed height for consistent vertical sizing */
-    line-height: 44px; /* Vertically center single line text */
+    padding: 0 20px;
+    /* Horizontal padding */
+    height: 44px;
+    /* Fixed height for consistent vertical sizing */
+    line-height: 44px;
+    /* Vertically center single line text */
     border: none;
-    border-radius: 4px; /* Re-apply rounded corners */
+    border-radius: 4px;
+    /* Re-apply rounded corners */
     text-align: center;
     text-decoration: none;
     display: inline-flex;
-    align-items: center; /* Vertically center content */
-    justify-content: center; /* Horizontally center content */
+    align-items: center;
+    /* Vertically center content */
+    justify-content: center;
+    /* Horizontally center content */
     font-size: 16px;
     font-weight: 500;
-    margin: 8px 4px; /* Consistent external margin for spacing */
+    margin: 8px 4px;
+    /* Consistent external margin for spacing */
     cursor: pointer;
     /* Apply box-shadow for general button look */
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.20);
     transition: background-color 0.3s ease-out, box-shadow 0.3s ease-out;
     font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     user-select: none;
-    box-sizing: border-box; /* Include padding/border in element's total width/height */
+    box-sizing: border-box;
+    /* Include padding/border in element's total width/height */
 }
 
 /* Base hover/active styles for regular buttons */
 .material-button:hover {
     background-color: #1976D2;
-    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.14), 0 8px 10px 1px rgba(0,0,0,0.12), 0 3px 14px 2px rgba(0,0,0,0.20);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.14), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.20);
 }
 
 .material-button:active {
     background-color: #0D47A1;
-    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.14), 0 8px 10px 1px rgba(0,0,0,0.12), 0 3px 14px 2px rgba(0,0,0,0.20);
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.14), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.20);
 }
 
 
 /* Adjustments for the dcc.Upload component itself (the outer container) */
 .dcc-upload-container {
-    background-color: #2196F3; /* Set initial background color here */
+    background-color: #2196F3;
+    /* Set initial background color here */
     display: inline-flex;
     height: 44px;
     margin: 8px 4px;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.20);
     border-radius: 4px;
-    transition: background-color 0.3s ease-out, box-shadow 0.3s ease-out; /* Apply transition here */
+    transition: background-color 0.3s ease-out, box-shadow 0.3s ease-out;
+    /* Apply transition here */
 }
 
 /* Hover and active states for the dcc.Upload container */
 .dcc-upload-container:hover {
-    background-color: #1976D2; /* Darker blue on hover */
-    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.14), 0 8px 10px 1px rgba(0,0,0,0.12), 0 3px 14px 2px rgba(0,0,0,0.20);
+    background-color: #1976D2;
+    /* Darker blue on hover */
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.14), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.20);
 }
 
 .dcc-upload-container:active {
-    background-color: #0D47A1; /* Even darker blue on click */
-    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.14), 0 8px 10px 1px rgba(0,0,0,0.12), 0 3px 14px 2px rgba(0,0,0,0.20);
+    background-color: #0D47A1;
+    /* Even darker blue on click */
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.14), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.20);
 }
 
 /* Target the direct div child of dcc.Upload that we gave .material-button class */
 .dcc-upload-container .material-button {
     /* Crucial: Remove background-color, box-shadow, border-radius, and transitions */
     /* These styles are now handled by the parent `.dcc-upload-container` */
-    background-color: transparent; /* Make it transparent so parent background shows */
+    background-color: transparent;
+    /* Make it transparent so parent background shows */
     box-shadow: none;
     margin: 0;
 }
